@@ -1,0 +1,22 @@
+15.11.2019
+Découvrir l'API plus profondément : https://developer.sportradar.com/docs/read/racing/MotoGP_v2
+KEY = ugq76ajd9yf5xrdwynanatjj
+pour fetch une api : https://blog.hellojs.org/fetching-api-data-with-react-js-460fe8bbf8f2
+apparement on n'est pas censé acceder aux données en js. Il faudrait les dl en utilisant curl.
+https://stackoverflow.com/questions/52171178/how-to-solve-access-control-allow-origin-error-when-trying-to-access-api-from/52171894
+il faudrait donc je mette ces données dans firebase
+apparement firebase peut récuperer des données depuis une requete CURL : https://firebase.google.com/docs/reference/rest/database
+21.11.2019
+je crée le projet et la base de données sur firebase
+je suis le tutoriel sur firebase à : https://www.tutorialspoint.com/firebase/firebase_environment_setup.htm
+Finalement je trouve un tuto pour du react je le commence :
+https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial#react-router-for-firebase-auth
+22.11.2019
+Je suis ce tuto pour react router : https://www.codingame.com/playgrounds/6517/react-router-tutorial
+Finalement je fais enfin fonctionner un Router grace à https://reacttraining.com/react-router/web/guides/quick-start
+Maintenant il faut que je remplise ma firebase
+J'ai trouvé ce fichier : http://www2.graphicnews.com/infostradasports/json/motogp/2019/GN38865_champdrivers.json
+
+curl -XPUT https://motocheat-362c9.firebaseio.com/test.json --data-binary "@new1.json" -H "Content-Type: application/json"
+curl -XPUT https://motocheat-362c9.firebaseio.com/riders/num.json --data-binary "" -H "Content-Type: application/json"
+29.11.2019

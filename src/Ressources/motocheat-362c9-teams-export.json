@@ -1,0 +1,110 @@
+{
+  "49138" : {
+    "debut" : 2003,
+    "id" : 49138,
+    "name" : "Mission Winnow Ducati",
+    "nationality" : "Italy",
+    "url_official" : "http://www.ducati.com/racing/00_home_racing/index.jhtml",
+    "vehicle_chassis" : "Desmosedici GP8",
+    "vehicle_tyres" : "Bridgestone"
+  },
+  "49139" : {
+    "debut" : 1999,
+    "id" : 49139,
+    "name" : "Monster Energy Yamaha Motogp",
+    "nationality" : "Italy",
+    "url_official" : "http://www.yamahamotogp.com/",
+    "vehicle_chassis" : "YZR M1",
+    "vehicle_tyres" : "Michelin"
+  },
+  "49144" : {
+    "debut" : 2002,
+    "id" : 49144,
+    "name" : "Alma Pramac Racing",
+    "nationality" : "Italy",
+    "url_official" : "https://www.pramacracing.com/en/",
+    "vehicle_chassis" : "Ducati GP19",
+    "vehicle_tyres" : "Michelin"
+  },
+  "49145" : {
+    "debut" : 1983,
+    "id" : 49145,
+    "name" : "Repsol Honda Team",
+    "nationality" : "Belgium",
+    "url_official" : "http://world.honda.com/MotoGP/",
+    "vehicle_chassis" : "RC213V",
+    "vehicle_tyres" : "Michelin"
+  },
+  "49146" : {
+    "debut" : 2002,
+    "id" : 49146,
+    "name" : "Team SUZUKI ECSTAR",
+    "nationality" : "Japan",
+    "url_official" : "https://www.suzuki-racing.com/motogp/",
+    "vehicle_chassis" : "GSX-RR",
+    "vehicle_tyres" : "Michelin"
+  },
+  "49183" : {
+    "debut" : 2001,
+    "id" : 49183,
+    "name" : "Red Bull KTM Tech 3",
+    "nationality" : "Austria",
+    "url_official" : "https://motogp.tech3racing.fr/index.php/en/",
+    "vehicle_chassis" : "KTM RC 16",
+    "vehicle_tyres" : "Michelin"
+  },
+  "61846" : {
+    "debut" : 1994,
+    "id" : 61846,
+    "name" : "Reale Avintia Racing",
+    "nationality" : "Spain",
+    "url_official" : "https://www.ducati.com/ww/en/racing/other-teams/reale-avintia-racing",
+    "vehicle_chassis" : "Desmosedicis 19",
+    "vehicle_tyres" : "Michelin"
+  },
+  "68546" : {
+    "debut" : 2014,
+    "id" : 68546,
+    "name" : "SIC Racing Team",
+    "nationality" : "Malaysia",
+    "url_official" : "https://www.yamaha-racing.com/motogp/teams/petronas-yamaha-srt",
+    "vehicle_chassis" : "YZR-M1",
+    "vehicle_tyres" : "Michelin"
+  },
+  "68582" : {
+    "debut" : 1997,
+    "id" : 68582,
+    "name" : "Aprilia Racing Team Gresini",
+    "nationality" : "Italy",
+    "url_official" : "https://www.gresiniracing.com/en/aprilia-racing-team-gresini-motogp/",
+    "vehicle_chassis" : "RS-GP",
+    "vehicle_tyres" : "Michelin"
+  },
+  "433524" : {
+    "debut" : 2016,
+    "id" : 433524,
+    "name" : "Red Bull KTM Factory Racing",
+    "nationality" : "Austria",
+    "url_official" : "https://www.ktm.com/en/racing/motogp/?id=71100",
+    "vehicle_chassis" : "KTM RC 16",
+    "vehicle_tyres" : "Michelin"
+  },
+  "447297" : {
+    "debut" : 2011,
+    "id" : 447297,
+    "name" : "LCR Honda Castrol",
+    "nationality" : "United-Kingdom",
+    "url_official" : "https://crutchlow.lcr.mc/",
+    "vehicle_chassis" : "Honda RC213V",
+    "vehicle_tyres" : "Michelin"
+  },
+  "447298" : {
+    "debut" : 1997,
+    "id" : 447298,
+    "name" : "LCR Honda",
+    "nationality" : "Japan",
+    "url_official" : "https://www.lcr.mc/",
+    "vehicle_chassis" : "Honda RC212V",
+    "vehicle_tyres" : "Michelin"
+  }
+}

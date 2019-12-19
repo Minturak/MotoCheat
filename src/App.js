@@ -1,0 +1,113 @@
+import React, {Component} from 'react';
+import {BrowserRouter as Router, Route, NavLink} from "react-router-dom";
+import './App.css';
+
+import { makeStyles } from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+
+import AppBar from '@material-ui/core/AppBar';
+import Typography from '@material-ui/core/Typography';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
+import Rider from './Components/Rider';
+import Team from './Components/Team';
+import Home from './Components/Home';
+import LogIn from './Components/Logging/LogIn';
+import SignUp from './Components/Logging/SignUp';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
+// const MyContext = React.createContext(defaultValue);
+
+class App extends Component {
+  constructor(props){
+    super();
+    this.state={
+      value:0,
+      anchorEl:null,
+      logged:false,
+      username:"",
+      riders:[]
+    }
+  }
+  handleChange = (event, newValue) =>{
+    this.setState({value:newValue});
+  };
+  handleClick = event => {
+    this.setState({anchorEl:event.currentTarget});
+  };
+  handleClose = event=> {
+    this.setState({anchorEl:null});
+    // console.log(event.target);
+    // console.log(event.target.value);
+  };
+  /*componentDidMount(){
+    this.getRiders();
+  }
+  getRiders = () => {
+    let ref = Firebase.database().ref().child("/riders");
+    // console.log(ref);
+    this.setState({riders:ref})
+    console.log(this.state.riders);
+    ref.on("value", function(snapshot) {
+      console.log(snapshot.val());
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+  };*/
+  render(){
+    return (
+      <>
+      <Router>
+        <div styles={{flexGrow:1}}>
+          <AppBar position="static">
+            <Toolbar>
+              <IconButton edge="start" color="inherit" aria-label="menu" onClick={this.handleClick}>
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="simple-menu"
+                anchorEl={this.state.anchorEl}
+                keepMounted
+                open={Boolean(this.state.anchorEl)}
+                onClose={this.handleClose}
+              >
+                <NavLink to="/"><MenuItem onClick={this.handleClose} value="Home">Home</MenuItem></NavLink>
+                <NavLink to="/riders"><MenuItem onClick={this.handleClose}>Riders</MenuItem></NavLink>
+                <NavLink to="/teams"><MenuItem onClick={this.handleClose}>Teams</MenuItem></NavLink>
+              </Menu>
+              <Typography variant="h6">
+
+              <div styles={{float:"left"}}>
+                {this.state.logged &&
+                  <Button >Logout</Button>
+                }
+                {!this.state.logged &&
+                  <>
+                  <NavLink to="/login"><Button >Login</Button></NavLink>
+                  <NavLink to="/signup"><Button >SignUp</Button></NavLink>
+                  </>
+                }
+              </div>
+              </Typography>
+            </Toolbar>
+          </AppBar>
+        </div>
+          <Route path="/" exact strict render={()=>(<Home/>)}/>
+          <Route path="/login" exact strict render={()=>(<LogIn/>)}/>
+          <Route path="/signup" exact strict render={()=>(<SignUp/>)}/>
+          <Route path="/riders" exact strict render={()=>(<Rider riders={this.state.riders}/>)}/>
+          <Route path="/teams" exact strict render={()=>(<Team/>)}/>
+        </Router>
+      </>
+  );}
+}
+export default App;
