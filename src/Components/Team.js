@@ -2,7 +2,13 @@ import React, {Component} from 'react';
 import { Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
+
 import TeamsData from '../Ressources/motocheat-362c9-teams-export.json';
+
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import StarIcon from '@material-ui/icons/Star';
+
 const useStyles = makeStyles({
   root: {
     width: '100%',
@@ -16,15 +22,20 @@ const useStyles = makeStyles({
 class Team extends Component {
   constructor(props) {
     super();
-    this.state={teams:undefined};
+    this.state={
+      teams:undefined,
+      favs:[]
+    };
   };
   componentDidMount() {
     var arr = [];
     Object.keys(TeamsData).forEach(function(key) {
       arr.push(TeamsData[key]);
     });
-    //console.log(arr)
     this.setState({teams:arr})
+  }
+  handleClick=event=>{
+    console.log(event.currentTarget.value);
   }
   render(){
     return(
@@ -38,6 +49,7 @@ class Team extends Component {
               <TableCell>Chasis</TableCell>
               <TableCell align="left">Pays</TableCell>
               <TableCell align="left">Site</TableCell>
+              <TableCell align="left">Favori</TableCell>
             </TableRow>
           </TableHead>
             <TableBody>
@@ -51,6 +63,7 @@ class Team extends Component {
                     Official website
                   </Link>
                 </TableCell>
+                <TableCell align="left"><Button onClick={this.handleClick} value={e.c_Num}><StarBorderIcon/></Button></TableCell>
               </TableRow>
             ))}
             </TableBody>

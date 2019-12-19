@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+
+import StarIcon from '@material-ui/icons/Star';
+
 class Home extends Component {
   constructor(props) {
     super();

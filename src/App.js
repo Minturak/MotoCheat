@@ -34,8 +34,7 @@ class App extends Component {
       value:0,
       anchorEl:null,
       logged:false,
-      username:"",
-      riders:[]
+      username:""
     }
   }
   handleChange = (event, newValue) =>{
@@ -46,25 +45,18 @@ class App extends Component {
   };
   handleClose = event=> {
     this.setState({anchorEl:null});
-    // console.log(event.target);
-    // console.log(event.target.value);
   };
-  /*componentDidMount(){
-    this.getRiders();
+  handleLogin = (email) =>{
+    this.setState({logged:true,username:email})
+    console.log(email)
   }
-  getRiders = () => {
-    let ref = Firebase.database().ref().child("/riders");
-    // console.log(ref);
-    this.setState({riders:ref})
-    console.log(this.state.riders);
-    ref.on("value", function(snapshot) {
-      console.log(snapshot.val());
-    }, function (errorObject) {
-      console.log("The read failed: " + errorObject.code);
-    });
-  };*/
+  handleLogout = _=>{
+    this.setState({logged:false,username:""})
+    console.log("Logged out");
+  }
   render(){
     return (
+
       <>
       <Router>
         <div styles={{flexGrow:1}}>
@@ -88,7 +80,7 @@ class App extends Component {
 
               <div styles={{float:"left"}}>
                 {this.state.logged &&
-                  <Button >Logout</Button>
+                  <Button onClick={this.handleLogout}>Logout</Button>
                 }
                 {!this.state.logged &&
                   <>
@@ -102,9 +94,9 @@ class App extends Component {
           </AppBar>
         </div>
           <Route path="/" exact strict render={()=>(<Home/>)}/>
-          <Route path="/login" exact strict render={()=>(<LogIn/>)}/>
-          <Route path="/signup" exact strict render={()=>(<SignUp/>)}/>
-          <Route path="/riders" exact strict render={()=>(<Rider riders={this.state.riders}/>)}/>
+          <Route path="/login" exact strict render={()=>(<LogIn onChange={this.handleLogin}/>)}/>
+          <Route path="/signup" exact strict render={()=>(<SignUp onChange={this.handleLogin}/>)}/>
+          <Route path="/riders" exact strict render={()=>(<Rider/>)}/>
           <Route path="/teams" exact strict render={()=>(<Team/>)}/>
         </Router>
       </>
