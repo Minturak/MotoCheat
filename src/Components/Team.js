@@ -33,9 +33,28 @@ class Team extends Component {
       arr.push(TeamsData[key]);
     });
     this.setState({teams:arr})
+    if(this.props.username !== "" && this.props.username !== undefined){
+      var f = JSON.parse(localStorage.getItem('favsTeams'+this.props.username));
+      if(f!==null){this.setState({favs:f})}
+    }
   }
-  handleClick=event=>{
-    console.log(event.currentTarget.value);
+  addFav=event=>{
+    console.log(this.props.username);
+    if(this.props.username !== "" && this.props.username !== undefined){
+      var arrFavs = this.state.favs
+      arrFavs.push(event.currentTarget.value)
+      this.setState({favs:arrFavs})
+      localStorage.setItem('favsTeams'+this.props.username, JSON.stringify(this.state.favs))
+    }else{
+      alert("Veuillez vous connecter pour ajouter des favoris")
+    }
+  }
+  removeFav=event=>{
+    var arrFavs = this.state.favs
+    var index = arrFavs.indexOf(event.currentTarget.value)
+    arrFavs.splice(index,1)
+    this.setState({favs:arrFavs})
+    localStorage.setItem('favsTeams'+this.props.username, JSON.stringify(this.state.favs))
   }
   render(){
     return(
@@ -52,21 +71,31 @@ class Team extends Component {
               <TableCell align="left">Favori</TableCell>
             </TableRow>
           </TableHead>
-            <TableBody>
-              {this.state.teams.map(e => (
-              <TableRow>
-                <TableCell component="th" scope="row">{e.name}</TableCell>
-                <TableCell align="left">{e.vehicle_chassis}</TableCell>
-                <TableCell align="left">{e.nationality}</TableCell>
-                <TableCell align="left">
-                  <Link href={e.url_official} target="_blank">
-                    Official website
-                  </Link>
-                </TableCell>
-                <TableCell align="left"><Button onClick={this.handleClick} value={e.c_Num}><StarBorderIcon/></Button></TableCell>
-              </TableRow>
-            ))}
-            </TableBody>
+          <TableBody>
+            {this.state.teams.map(e => (
+            <TableRow>
+              <TableCell component="th" scope="row">{e.name}</TableCell>
+              <TableCell align="left">{e.vehicle_chassis}</TableCell>
+              <TableCell align="left">{e.nationality}</TableCell>
+              <TableCell align="left">
+                <Link href={e.url_official} target="_blank">
+                  Official website
+                </Link>
+              </TableCell>
+              <TableCell align="left">
+                {this.state.favs !== null && this.state.favs.includes(e.name) && this.props.username !== "" ? (
+                  <Button onClick={this.removeFav} value={e.name}>
+                      <StarIcon/>
+                  </Button>
+                ):(
+                  <Button onClick={this.addFav} value={e.name}>
+                      <StarBorderIcon/>
+                  </Button>
+                )}
+              </TableCell>
+            </TableRow>
+          ))}
+          </TableBody>
         </Table>
         }
       </div>

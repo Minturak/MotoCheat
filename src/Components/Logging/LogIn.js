@@ -30,6 +30,7 @@ class LogIn extends Component{
         //set global state to logged
     }catch (error){
       alert("Adresse email inconnu ou mot de passe incorrect")
+      console.log(error)
     }
   }
   render(){

@@ -43,7 +43,7 @@ class App extends Component {
   handleClick = event => {
     this.setState({anchorEl:event.currentTarget});
   };
-  handleClose = event=> {
+  handleClose = event => {
     this.setState({anchorEl:null});
   };
   handleLogin = (email) =>{
@@ -93,11 +93,11 @@ class App extends Component {
             </Toolbar>
           </AppBar>
         </div>
-          <Route path="/" exact strict render={()=>(<Home/>)}/>
+          <Route path="/" exact strict render={()=>(<Home username={this.state.username}/>)}/>
           <Route path="/login" exact strict render={()=>(<LogIn onChange={this.handleLogin}/>)}/>
           <Route path="/signup" exact strict render={()=>(<SignUp onChange={this.handleLogin}/>)}/>
-          <Route path="/riders" exact strict render={()=>(<Rider/>)}/>
-          <Route path="/teams" exact strict render={()=>(<Team/>)}/>
+          <Route path="/riders" exact strict render={()=>(<Rider username={this.state.username}/>)}/>
+          <Route path="/teams" exact strict render={()=>(<Team username={this.state.username}/>)}/>
         </Router>
       </>
   );}
