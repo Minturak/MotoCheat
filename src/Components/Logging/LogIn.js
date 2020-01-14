@@ -1,11 +1,9 @@
 import React, {Component} from "react";
 import Firebase from 'firebase';
-import config from '../Firebase/config';
 import {Redirect} from "react-router-dom";
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
 
 class LogIn extends Component{
   constructor(props){
@@ -18,9 +16,8 @@ class LogIn extends Component{
       await Firebase
         .auth()
         .signInWithEmailAndPassword(this.state.email, this.state.password);
-this.props.onChange(this.state.email);
+        this.props.onChange(this.state.email);
         this.setState({redirect:true})
-
     }catch (error){
       alert("Adresse email inconnu ou mot de passe incorrect")
       console.log(error)

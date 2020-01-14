@@ -1,20 +1,9 @@
 import React, {Component} from "react";
 import Firebase from 'firebase';
-import config from '../Firebase/config';
 import {Redirect} from "react-router-dom";
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-
-
-const useStyles = makeStyles({
-  root: {
-    width: '100%',
-    overflowX: 'auto',
-    display: 'flex'
-  }
-});
 
 class SignUp extends Component{
   constructor(props){

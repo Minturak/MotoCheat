@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, NavLink} from "react-router-dom";
 import './App.css';
 
-import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
@@ -19,12 +18,6 @@ import Home from './Components/Home';
 import LogIn from './Components/Logging/LogIn';
 import SignUp from './Components/Logging/SignUp';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
 // const MyContext = React.createContext(defaultValue);
 
 class App extends Component {
