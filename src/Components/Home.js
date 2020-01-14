@@ -33,24 +33,33 @@ class Home extends Component {
     };
   };
   componentDidMount() {
+    console.log("hello"+this.props.username);
     if(this.props.username !== "" && this.props.username !== undefined){
       var ft = JSON.parse(localStorage.getItem('favsTeams'+this.props.username));
-      if(ft!==null){this.setState({favsTeams:ft})}
-      var arrTeams = [];
-      Object.keys(TeamsData).forEach(function(key) {
-        if(ft.includes(TeamsData[key].name)){arrTeams.push(TeamsData[key])}
-      });
-      this.setState({teams:arrTeams})
+      console.log(ft);
+      if(ft!==null){
+        this.setState({favsTeams:ft})
+      }
+        var arrTeams = [];
+        Object.keys(TeamsData).forEach(function(key) {
+          if(ft.includes(TeamsData[key].name)){arrTeams.push(TeamsData[key])}
+        });
+        this.setState({teams:arrTeams})
+
     }
 
     if(this.props.username !== "" && this.props.username !== undefined){
       var f = JSON.parse(localStorage.getItem('favsRiders'+this.props.username));
-      if(f!==null){this.setState({favsRiders:f})}
-      var arrRiders = [];
-      Object.keys(RidersData).forEach(function(key) {
-        if(f.includes(RidersData[key].c_Num)){arrRiders.push(RidersData[key])}
-      });
-      this.setState({riders:arrRiders})
+      console.log(f);
+      if(f!==null){
+        this.setState({favsRiders:f})
+      }
+        var arrRiders = [];
+        Object.keys(RidersData).forEach(function(key) {
+          if(f.includes(RidersData[key].c_Num)){arrRiders.push(RidersData[key])}
+        });
+        this.setState({riders:arrRiders})
+      
     }
   }
   removeFavRider=event=>{
@@ -69,94 +78,101 @@ class Home extends Component {
   }
   render(){
       return(
-        <div>
+        <div style={{margin:30}}>
           <h1>Accueil</h1>
-          {this.props.username === "" &&
-            <p>Veuillez vous connecter pour voir vos favoris</p>
+          {this.props.username === ""
+            ? <p>Veuillez vous connecter pour voir vos favoris</p>
+            : <div>
+            {this.state.favsTeams !== [0] && this.state.teams !== undefined &&
+              <div>
+                <h2>Équipes favorites</h2>
+                <Table className={useStyles.table} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Nom</TableCell>
+                      <TableCell>Chasis</TableCell>
+                      <TableCell align="left">Pays</TableCell>
+                      <TableCell align="left">Site</TableCell>
+                      <TableCell align="left">Favori</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.teams.map(e => (
+                      <TableRow>
+                        <TableCell component="th" scope="row">{e.name}</TableCell>
+                        <TableCell align="left">{e.vehicle_chassis}</TableCell>
+                        <TableCell align="left">{e.nationality}</TableCell>
+                        <TableCell align="left">
+                          <Link href={e.url_official} target="_blank">
+                            Official website
+                          </Link>
+                        </TableCell>
+                        <TableCell align="left">
+                          {this.state.favsTeams !== null && this.state.favsTeams.includes(e.name) && this.props.username !== "" ? (
+                            <Button onClick={this.removeFavTeam} value={e.name}>
+                                <StarIcon/>
+                            </Button>
+                          ):(
+                            <Button onClick={this.addFav} value={e.name}>
+                                <StarBorderIcon/>
+                            </Button>
+                          )}
+                        </TableCell>
+                      </TableRow>
+                  ))}
+                </TableBody>
+                </Table>
+              </div>
+            }
+            {this.state.favsRiders !== [0] && this.state.riders !== undefined &&
+              <div>
+                <h2>Pilotes favoris</h2>
+                <Table className={useStyles.table} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                    <TableCell>Numéro</TableCell>
+                    <TableCell>Nom</TableCell>
+                    <TableCell align="left">Prénom</TableCell>
+                    <TableCell align="left">Pays</TableCell>
+                    <TableCell align="left">Equipe</TableCell>
+                    <TableCell align="left">Points</TableCell>
+                    <TableCell align="left">Favori</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.riders.map(e => (
+                      <TableRow>
+                        <TableCell component="th" scope="row">{e.c_Num}</TableCell>
+                        <TableCell align="left">{e.c_PersonLastname}</TableCell>
+                        <TableCell align="left">{e.c_PersonFirstname}</TableCell>
+                        <TableCell align="left">{e.c_NOC}</TableCell>
+                        <TableCell align="left">{e.c_Team}</TableCell>
+                        <TableCell align="left">{e.c_Points}</TableCell>
+                        <TableCell align="left">
+                        {this.state.favsRiders !== null && this.state.favsRiders.includes(e.c_Num) && this.props.username !== "" ? (
+                          <Button onClick={this.removeFavRider} value={e.c_Num}>
+                              <StarIcon/>
+                          </Button>
+                        ):(
+                          <Button onClick={this.addFav} value={e.c_Num}>
+                              <StarBorderIcon/>
+                          </Button>
+                        )}
+                        </TableCell>
+                      </TableRow>
+                  ))}
+                </TableBody>
+                </Table>
+              </div>
+            }
+            </div>
           }
           {this.state.favsTeams.length === 0 && this.state.favsRiders.length === 0 &&
             <p>Vous n'avez aucun favoris pour le moment!
             Visitez les pages <NavLink to="/riders"><Button >pilotes</Button></NavLink> et <NavLink to="/teams"><Button >equipes</Button></NavLink> pour en ajouter</p>
           }
-          {this.state.favsTeams !== [0] && this.state.teams !== undefined &&
-            <Table className={useStyles.table} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Nom</TableCell>
-                  <TableCell>Chasis</TableCell>
-                  <TableCell align="left">Pays</TableCell>
-                  <TableCell align="left">Site</TableCell>
-                  <TableCell align="left">Favori</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {this.state.teams.map(e => (
-                  <TableRow>
-                    <TableCell component="th" scope="row">{e.name}</TableCell>
-                    <TableCell align="left">{e.vehicle_chassis}</TableCell>
-                    <TableCell align="left">{e.nationality}</TableCell>
-                    <TableCell align="left">
-                      <Link href={e.url_official} target="_blank">
-                        Official website
-                      </Link>
-                    </TableCell>
-                    <TableCell align="left">
-                      {this.state.favsTeams !== null && this.state.favsTeams.includes(e.name) && this.props.username !== "" ? (
-                        <Button onClick={this.removeFavTeam} value={e.name}>
-                            <StarIcon/>
-                        </Button>
-                      ):(
-                        <Button onClick={this.addFav} value={e.name}>
-                            <StarBorderIcon/>
-                        </Button>
-                      )}
-                    </TableCell>
-                  </TableRow>
-              ))}
-            </TableBody>
-            </Table>
-          }
-          {this.state.favsRiders !== [0] && this.state.riders !== undefined &&
-            <Table className={useStyles.table} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                <TableCell>Numéro</TableCell>
-                <TableCell>Nom</TableCell>
-                <TableCell align="left">Prénom</TableCell>
-                <TableCell align="left">Pays</TableCell>
-                <TableCell align="left">Equipe</TableCell>
-                <TableCell align="left">Points</TableCell>
-                <TableCell align="left">Favori</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {this.state.riders.map(e => (
-                  <TableRow>
-                    <TableCell component="th" scope="row">{e.c_Num}</TableCell>
-                    <TableCell align="left">{e.c_PersonLastname}</TableCell>
-                    <TableCell align="left">{e.c_PersonFirstname}</TableCell>
-                    <TableCell align="left">{e.c_NOC}</TableCell>
-                    <TableCell align="left">{e.c_Team}</TableCell>
-                    <TableCell align="left">{e.c_Points}</TableCell>
-                    <TableCell align="left">
-                    {this.state.favsRiders !== null && this.state.favsRiders.includes(e.c_Num) && this.props.username !== "" ? (
-                      <Button onClick={this.removeFavRider} value={e.c_Num}>
-                          <StarIcon/>
-                      </Button>
-                    ):(
-                      <Button onClick={this.addFav} value={e.c_Num}>
-                          <StarBorderIcon/>
-                      </Button>
-                    )}
-                    </TableCell>
-                  </TableRow>
-              ))}
-            </TableBody>
-            </Table>
-          }
         </div>
       )
-
   }
 };
 export default Home;

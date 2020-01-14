@@ -3,6 +3,11 @@ import { Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/co
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 import TeamsData from '../Ressources/motocheat-362c9-teams-export.json';
 
@@ -24,9 +29,34 @@ class Team extends Component {
     super();
     this.state={
       teams:undefined,
-      favs:[]
+      favs:[],
+      orderOption:['name','nationality'],
     };
   };
+  changeOrder=event=>{
+    var tri = event.target.value;
+    var teams = this.state.teams;
+    switch(tri){
+      case this.state.orderOption[0]:
+       // tri par nom
+        teams.sort((a,b)=>{
+          if(a.name<b.name)return -1;
+          if(a.name>b.name)return 1;
+          return 0;
+        })
+        this.setState({teams:teams})
+        break;
+      case this.state.orderOption[1]:
+        // tri par nationalité
+        teams.sort((a,b)=>{
+          if(a.nationality<b.nationality)return -1;
+          if(a.nationality>b.nationality)return 1;
+          return 0;
+        })
+        this.setState({teams:teams})
+        break;
+    }
+  }
   componentDidMount() {
     var arr = [];
     Object.keys(TeamsData).forEach(function(key) {
@@ -58,9 +88,21 @@ class Team extends Component {
   }
   render(){
     return(
-      <div>
-        <h1>Teams</h1>
+      <div style={{margin:30}}>
+        <h1>Équipes</h1>
         {this.state.teams !== undefined &&
+          <div>
+          <FormControl>
+            <InputLabel>Tri</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              onChange={this.changeOrder}
+              style={{width:120}}
+            >
+              <MenuItem value={'name'}>Nom</MenuItem>
+              <MenuItem value={'nationality'}>Nationalité</MenuItem>
+            </Select>
+          </FormControl>
         <Table className={useStyles.table} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -97,6 +139,7 @@ class Team extends Component {
           ))}
           </TableBody>
         </Table>
+        </div>
         }
       </div>
     )

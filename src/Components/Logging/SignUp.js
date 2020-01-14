@@ -41,13 +41,13 @@ class SignUp extends Component{
   }
   render(){
     return(
-      <div className={useStyles.root}>
+      <div style={{margin:30}}>
       {this.state.redirect === true &&
         <Redirect to='/'/>
       }
-        <TextField id="filled-basic" label="Email" variant="filled" onChange={(event)=>this.setState({email:event.target.value})}/><br/>
-        <TextField id="filled-basic" label="Validez le mot de passe" variant="filled" type="password" onChange={(event)=>this.setState({password:event.target.value})}/><br/>
-        <TextField id="filled-basic" label="Mt de passe" variant="filled" type="password" onChange={(event)=>this.setState({confirm:event.target.value})}/><br/>
+        <TextField id="filled-basic" label="Email" variant="filled" onChange={(event)=>this.setState({email:event.target.value})}/><br/><br/>
+        <TextField id="filled-basic" label="Validez le mot de passe" variant="filled" type="password" onChange={(event)=>this.setState({password:event.target.value})}/><br/><br/>
+        <TextField id="filled-basic" label="Mt de passe" variant="filled" type="password" onChange={(event)=>this.setState({confirm:event.target.value})}/><br/><br/>
         <Button variant="outlined" onClick={this.handleSignUp}>Connexion</Button>
       </div>
     )

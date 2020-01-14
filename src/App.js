@@ -72,20 +72,20 @@ class App extends Component {
                 open={Boolean(this.state.anchorEl)}
                 onClose={this.handleClose}
               >
-                <NavLink to="/"><MenuItem onClick={this.handleClose} value="Home">Home</MenuItem></NavLink>
-                <NavLink to="/riders"><MenuItem onClick={this.handleClose}>Riders</MenuItem></NavLink>
-                <NavLink to="/teams"><MenuItem onClick={this.handleClose}>Teams</MenuItem></NavLink>
+                <NavLink to="/"><MenuItem onClick={this.handleClose} value="Home">Accueil</MenuItem></NavLink>
+                <NavLink to="/riders"><MenuItem onClick={this.handleClose}>Pilotes</MenuItem></NavLink>
+                <NavLink to="/teams"><MenuItem onClick={this.handleClose}>Equipes</MenuItem></NavLink>
               </Menu>
               <Typography variant="h6">
 
               <div styles={{float:"left"}}>
                 {this.state.logged &&
-                  <Button onClick={this.handleLogout}>Logout</Button>
+                  <NavLink to="/"><Button onClick={this.handleLogout}>Déconnexion</Button></NavLink>
                 }
                 {!this.state.logged &&
                   <>
-                  <NavLink to="/login"><Button >Login</Button></NavLink>
-                  <NavLink to="/signup"><Button >SignUp</Button></NavLink>
+                  <NavLink to="/login"><Button >Connexion</Button></NavLink>
+                  <NavLink to="/signup"><Button >Créer un compte</Button></NavLink>
                   </>
                 }
               </div>
